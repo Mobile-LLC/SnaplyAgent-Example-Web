@@ -59,10 +59,10 @@ contains the original content.
 
 ```
 input[type=password]
-input[autocomplete*=cc-]      /* cc-number, cc-csc, cc-exp, … */
 ```
 
-**Everything else is captured as-is.** Mark anything a support agent should not read:
+**That is the whole list. Everything else is captured as-is** — card numbers included. Mark anything
+a support agent should not read:
 
 ```html
 <input snaply-redact />                     <!-- default "REDACTED" label -->
@@ -76,11 +76,15 @@ To restyle every box at once, pass `redaction` to `init`:
 Snaply.init({ key, redaction: { color: "#333", label: "" } });   // label: "" = plain box
 ```
 
-### One cross-platform difference worth knowing
+### The same rule on every platform
 
-The **Android** SDK auto-redacts **password fields only** — not card fields. If you ship both, the
-same card input that is covered for free on web must be marked explicitly on Android with
-`snaplyRedact()`. Do not assume parity here.
+iOS, Android and the web all cover password fields and nothing else. Marking is deliberately the
+host app's decision: a card number is the obvious case, but a booking reference, a medical note or
+another customer's name on the same screen are not, and an SDK that guessed at some of them would
+teach you to trust a guess that is wrong for the rest.
+
+So whatever you mark here, mark the equivalent on native — `snaplyRedact()` on Android, the same on
+iOS. One decision, three platforms.
 
 ## What the SDK does and does not capture
 

@@ -48,13 +48,13 @@
       <div class="muted">Order #8412 · Margherita pizza · 2</div>
 
       <!--
-        Redacted automatically, with no code: the SDK's selector covers
-        `input[type=password]` and `input[autocomplete*=cc-]`.
-        NOTE the platform difference — the ANDROID SDK auto-redacts password fields ONLY, so the
-        same card field there must be marked explicitly with snaplyRedact().
+        The one line that matters most in this file.
+        The SDK covers password fields automatically and NOTHING else — a card number included.
+        `snaply-redact` is what hides it, and the same rule holds on iOS and Android, so marking it
+        once here is the same decision you make on every platform.
       -->
       <label>Card number</label>
-      <input autocomplete="cc-number" value="4242 4242 4242 4242" />
+      <input autocomplete="cc-number" snaply-redact value="4242 4242 4242 4242" />
 
       <!--
         Not a card and not a password, so nothing about it is automatically sensitive — the
