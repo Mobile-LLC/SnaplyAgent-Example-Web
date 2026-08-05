@@ -61,8 +61,7 @@ contains the original content.
 input[type=password]
 ```
 
-**That is the whole list. Everything else is captured as-is** — card numbers included. Mark anything
-a support agent should not read:
+**That is the whole list. Everything else is captured as-is.** Mark whatever you want hidden:
 
 ```html
 <input snaply-redact />                     <!-- default "REDACTED" label -->
@@ -78,10 +77,9 @@ Snaply.init({ key, redaction: { color: "#333", label: "" } });   // label: "" = 
 
 ### The same rule on every platform
 
-iOS, Android and the web all cover password fields and nothing else. Marking is deliberately the
-host app's decision: a card number is the obvious case, but a booking reference, a medical note or
-another customer's name on the same screen are not, and an SDK that guessed at some of them would
-teach you to trust a guess that is wrong for the rest.
+iOS, Android and the web all cover password fields and nothing else. What counts as sensitive is
+your call — the SDK does not guess, because a guess that is right for one app is wrong for the
+next, and a rule you can state is worth more than one you have to remember the exceptions to.
 
 So whatever you mark here, mark the equivalent on native — `snaplyRedact()` on Android, the same on
 iOS. One decision, three platforms.
