@@ -1,7 +1,6 @@
 # Snaply Agent — web example
 
-A complete, runnable integration of the [Snaply Agent](https://snaplyagent.com) web SDK. Clone it,
-drop in your key, run it.
+A complete, runnable integration of the Snaply Agent web SDK. Clone it, drop in your key, run it.
 
 The whole integration is in [`src/main.js`](src/main.js) — about fifteen lines. Everything else is a
 pretend checkout, there so the SDK has something realistic to capture.
@@ -118,6 +117,13 @@ out — `Snaply.showSupportCode()`.
 | `invalid_key` | The key is wrong, or still the placeholder above |
 | `origin_mismatch` | This page's domain is not on the product's allowed list |
 | `quota_exceeded` | The workspace is out of screenshots for the cycle |
+
+## Vendor ID
+
+There isn't one on the web, and there will not be. Browsers expose no per-device identifier, and
+Snaply will not derive one from a fingerprint. Identity is an install-scoped UUID, so a cleared
+profile or a private window arrives as a new device. Nothing for you to declare.
+
 
 ## Docs
 
