@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Snaply Agent — web example</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f7f5ef; color: #172019; margin: 0; padding: 40px;
+      }
+      .app {
+        max-width: 420px; margin: 0 auto; background: #fff;
+        border: 1px solid #e5e1d4; border-radius: 18px; padding: 24px;
+      }
+      h1 { font-size: 20px; margin: 0 0 4px; }
+      .muted { color: #5e6b60; font-size: 13px; }
+      label { display: block; font-size: 12px; color: #5e6b60; margin-top: 14px; }
+      input {
+        border: 1px solid #dcd8c9; border-radius: 10px; padding: 10px 12px;
+        font-size: 13px; width: 100%; box-sizing: border-box; margin-top: 4px;
+      }
+      .banner {
+        margin-top: 16px; background: #fbe7e1; border: 1px solid #f3c9bd;
+        color: #9e2f1d; border-radius: 12px; padding: 12px 14px; font-size: 13px;
+      }
+      .status { margin-top: 20px; font-size: 12px; color: #8a968c; min-height: 1.2em; }
+      button {
+        margin-top: 14px; cursor: pointer; border: none; border-radius: 999px;
+        padding: 10px 22px; font-size: 12.5px; font-weight: 600;
+        background: #0c6b57; color: #fff;
+      }
+      @media (prefers-color-scheme: dark) {
+        body { background: #10130f; color: #e8ece6; }
+        .app { background: #171b15; border-color: #2b3128; }
+        input { background: #10130f; color: #e8ece6; border-color: #2b3128; }
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      A pretend checkout with a failed payment — the situation someone actually contacts support
+      about. The integration itself is entirely in src/main.js.
+    -->
+    <div class="app">
+      <h1>Acme Delivery</h1>
+      <div class="muted">Order #8412 · Margherita pizza · 2</div>
+
+      <!--
+        Redacted automatically, with no code: the SDK's selector covers
+        `input[type=password]` and `input[autocomplete*=cc-]`.
+        NOTE the platform difference — the ANDROID SDK auto-redacts password fields ONLY, so the
+        same card field there must be marked explicitly with snaplyRedact().
+      -->
+      <label>Card number</label>
+      <input autocomplete="cc-number" value="4242 4242 4242 4242" />
+
+      <!--
+        Not a card and not a password, so nothing about it is automatically sensitive — the
+        `snaply-redact` attribute is how you say it is. The value sets the box's label.
+      -->
+      <label>Delivery address</label>
+      <input snaply-redact="HIDDEN" value="12 Rue des Lilas, Paris" />
+
+      <div class="banner">Payment failed — card declined (402)</div>
+
+      <div class="status" id="status">Connecting…</div>
+      <div class="status" id="code"></div>
+      <button id="show-code">Show support code</button>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
