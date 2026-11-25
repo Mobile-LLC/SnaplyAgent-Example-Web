@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@snaplyagent/sdk": "^2.45.0"
+    "@snaplyagent/sdk": "^2.45.1"
   },
   "devDependencies": {
     "vite": "^6.0.0"
